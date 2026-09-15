@@ -25,3 +25,5 @@ The animation holds each recorded profile for 1.4 seconds and transitions to
 the next in 0.9 seconds at 20 frames per second. Radar coordinates ease between
 profiles on a fixed scale; numeric results remain at the recorded endpoints,
 with a fade between model cards. The last profile transitions back to the first.
+Three colored sectors group the nine axes; each group name follows the outer arc
+around its three capability labels.

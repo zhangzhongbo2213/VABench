@@ -14,8 +14,11 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.colors import to_rgb
+from matplotlib.font_manager import FontProperties
 from matplotlib.offsetbox import AnnotationBbox, OffsetImage
-from matplotlib.patches import FancyBboxPatch, Polygon
+from matplotlib.patches import FancyBboxPatch, PathPatch, Polygon, Wedge
+from matplotlib.textpath import TextPath, TextToPath
+from matplotlib.transforms import Affine2D
 import numpy as np
 from PIL import Image
 
@@ -27,6 +30,7 @@ INK = "#18233B"
 MUTED = "#758096"
 LINE = "#E4E9F2"
 GROUPS = ["#418FAD", "#8570C2", "#C08369"]
+GROUP_NAMES = ["Spatial perception", "Robot manipulation", "Error recovery"]
 plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
                      "text.color": INK, "axes.labelcolor": MUTED,
                      "svg.fonttype": "path", "savefig.facecolor": "white"})
@@ -137,20 +141,64 @@ def task_matrix():
     plt.close(fig)
 
 
+def arc_label(ax, text, radius, center, color):
+    """Place upright glyphs along an arc, reversing direction on the lower half."""
+    font = FontProperties(family="DejaVu Sans", weight="bold", size=10.5)
+    metrics = TextToPath()
+    widths = np.array([metrics.get_text_width_height_descent(c, font, False)[0]
+                       for c in text])
+    tracking = .7
+    total = widths.sum() + tracking * (len(text) - 1)
+    centers = np.cumsum(widths) - widths / 2 + np.arange(len(text)) * tracking - total / 2
+    ax.apply_aspect()
+    pixels_per_unit = np.linalg.norm(ax.transData.transform((1, 0)) - ax.transData.transform((0, 0)))
+    points_to_units = ax.figure.dpi / 72 / pixels_per_unit
+    cap_midline = TextPath((0, 0), "H", prop=font).get_extents().y1 / 2
+    direction = -1 if np.sin(np.deg2rad(center)) >= 0 else 1
+    for character, width, offset in zip(text, widths, centers):
+        if character.isspace():
+            continue
+        angle = np.deg2rad(center) + direction * offset * points_to_units / radius
+        glyph = TextPath((0, 0), character, prop=font)
+        transform = (Affine2D().translate(-width / 2, -cap_midline)
+                     .scale(points_to_units).rotate(angle + direction * np.pi / 2)
+                     .translate(radius * np.cos(angle), radius * np.sin(angle)))
+        ax.add_patch(PathPatch(glyph, transform=transform + ax.transData,
+                              facecolor=color, edgecolor="none", zorder=5))
+
+
 class Radar:
     def __init__(self):
-        self.fig = plt.figure(figsize=(12.8, 7.2), dpi=100)
+        self.fig = plt.figure(figsize=(12.8, 8.2), dpi=100)
         card(self.fig)
         header(self.fig, "02", "TOP 10 · BEHAVIORAL PROFILES", "Nine dimensions of embodied intelligence")
-        self.ax = self.fig.add_axes([.018, .135, .63, .65])
+        self.ax = self.fig.add_axes([.01, .075, .675, .72])
         self.ax.set_aspect("equal")
-        self.ax.set_xlim(-151, 151)
-        self.ax.set_ylim(-132, 132)
+        self.ax.set_xlim(-183, 183)
+        self.ax.set_ylim(-183, 183)
         self.ax.axis("off")
         self.theta = np.pi / 2 - np.arange(9) * 2 * np.pi / 9
         self.unit = np.column_stack([np.cos(self.theta), np.sin(self.theta)])
-        self.ax.add_patch(Polygon(self.unit * 100, closed=True, facecolor="#FAFBFE",
-                                  edgecolor="none", zorder=-1))
+        outline = Polygon(self.unit * 100, closed=True, facecolor="#FAFBFE",
+                          edgecolor="none", zorder=-3)
+        self.ax.add_patch(outline)
+        for j, name in enumerate(GROUP_NAMES):
+            center = 50 - j * 120
+            start, end = center - 60, center + 60
+            sector = Wedge((0, 0), 100, start, end, facecolor=GROUPS[j],
+                           edgecolor="none", alpha=.075, zorder=-2)
+            sector.set_clip_path(outline)
+            self.ax.add_patch(sector)
+            self.ax.add_patch(Wedge((0, 0), 158, start + 2, end - 2, width=46,
+                                    facecolor=GROUPS[j], edgecolor="none", alpha=.045, zorder=-2))
+            angles = np.deg2rad(np.linspace(start + 3, end - 3, 120))
+            self.ax.plot(158 * np.cos(angles), 158 * np.sin(angles), color=GROUPS[j],
+                         linewidth=2.2, alpha=.75, solid_capstyle="round", zorder=1)
+            boundary = np.deg2rad(start)
+            self.ax.plot(np.array([103, 158]) * np.cos(boundary),
+                         np.array([103, 158]) * np.sin(boundary), color=LINE,
+                         linewidth=.85, linestyle=(0, (2, 3)), zorder=0)
+            arc_label(self.ax, name.upper(), 172, center, GROUPS[j])
         for radius in (20, 40, 60, 80, 100):
             self.ax.add_patch(Polygon(self.unit * radius, closed=True,
                   fill=False, edgecolor=LINE, linewidth=.85, zorder=0))
@@ -165,16 +213,9 @@ class Radar:
                   "Error\ndetection", "Online\ncorrection", "Post-failure\nadjustment"]
         self.labels = []
         for i, (label, dim) in enumerate(zip(labels, DATA["dimensions"])):
-            x, y = self.unit[i] * 117
-            ha = "left" if x > 25 else "right" if x < -25 else "center"
-            if y < -100:
-                va = "top"
-            elif y > 100:
-                va = "bottom"
-            else:
-                va = "center"
-            self.ax.text(x, y, label, fontsize=9.3, ha=ha, va=va, linespacing=1.35,
-                         color=GROUPS[dim["group"]], weight="medium")
+            x, y = self.unit[i] * 127
+            self.labels.append(self.ax.text(x, y, label, fontsize=9.3, ha="center", va="center",
+                               linespacing=1.35, color=GROUPS[dim["group"]], weight="medium"))
         self.polygon = Polygon(self.unit * 50, closed=True, linewidth=2.4,
                                edgecolor=MODELS[0]["color"], facecolor=(*to_rgb(MODELS[0]["color"]), .16), zorder=3)
         self.ax.add_patch(self.polygon)
@@ -190,13 +231,10 @@ class Radar:
         self.fig.text(.716, .567, "OVERALL TASK SUCCESS", fontsize=8, color=INK, weight="bold")
         self.success_label = self.fig.text(.715, .513, "", fontsize=31, weight="bold", va="center")
         self.group_values = []
-        for j, name in enumerate(["Spatial perception", "Robot manipulation", "Error recovery"]):
+        for j, name in enumerate(GROUP_NAMES):
             y = .433 - j*.081
             self.fig.text(.716, y, name, fontsize=9.5, weight="bold", color=GROUPS[j])
             self.group_values.append(self.fig.text(.716, y-.028, "", fontsize=9.3, color=INK))
-        self.fig.text(.042, .096, "SPATIAL PERCEPTION", color=GROUPS[0], fontsize=8, weight="bold")
-        self.fig.text(.23, .096, "ROBOT MANIPULATION", color=GROUPS[1], fontsize=8, weight="bold")
-        self.fig.text(.432, .096, "ERROR RECOVERY", color=GROUPS[2], fontsize=8, weight="bold")
         self.progress = []
         for i in range(10):
             x = .044 + i*.0913
@@ -247,6 +285,7 @@ class Radar:
         command = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
                    "-f", "rawvideo", "-vcodec", "rawvideo", "-pix_fmt", "rgb24",
                    "-s", f"{width}x{height}", "-r", str(fps), "-i", "-", "-an",
+                   "-vf", "pad=ceil(iw/2)*2:ceil(ih/2)*2:color=white",
                    "-c:v", "libx264", "-preset", "fast", "-crf", "17", "-pix_fmt", "yuv420p",
                    str(MEDIA / "capabilities_top10.mp4")]
         with subprocess.Popen(command, stdin=subprocess.PIPE) as process:
