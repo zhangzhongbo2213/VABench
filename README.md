@@ -1,113 +1,128 @@
-# VA-Bench
+<p align="center">
+  <img src="docs/media/title.svg" alt="VA-Bench: Measuring Embodied Spatial Intelligence through Visual Demonstrations, Active Perception, and Metric Control" width="100%">
+</p>
 
-Vision-language models control a robot through RGB observations and structured
-actions. This package includes the agent, active-camera interface, **11 single-arm
-and 3 dual-arm task environments**, expert RGB videos, and **20 validated seeds
-per task**. Generalization and long-horizon tasks are excluded.
+<p align="center">
+Zhongbo Zhang<sup>1,*</sup> · Jiayi Jin<sup>1,*</sup> · Yifan Wang<sup>1</sup> · Zaibin Zhang<sup>1</sup><br>
+Haiwen Diao<sup>2</sup> · Lijun Wang<sup>1</sup> · Huchuan Lu<sup>1</sup>
+</p>
 
-## Setup
+<p align="center">
+<sup>1</sup> Dalian University of Technology &nbsp;&nbsp; <sup>2</sup> Nanyang Technological University<br>
+<sub>* Equal contribution</sub>
+</p>
 
-Linux, Python 3.10, an NVIDIA GPU, and a working RoboTwin environment with SAPIEN
-3.0.0b1, mplib 0.2.1 and cuRobo are required. On a machine with an existing
-RoboTwin environment and assets:
+<p align="center">
+<a href="#task-success">Results</a> &nbsp; / &nbsp;
+<a href="#behavioral-profiles">Capability profiles</a> &nbsp; / &nbsp;
+<a href="#quick-start">Quick start</a> &nbsp; / &nbsp;
+<a href="https://github.com/zhangzhongbo2213/VA-Bench-test/releases/tag/assets-v1">Download assets</a>
+</p>
+
+**Embodied spatial intelligence, tested through action.** VA-Bench evaluates the
+complete observe–reason–act–revise loop. From RGB-only demonstrations, multimodal
+models learn task context, actively choose camera viewpoints, issue metric Cartesian
+commands, and revise their actions using execution feedback. We evaluate 12 models
+on 14 manipulation tasks, combining strict task success with nine behavioral
+diagnostics of perception, manipulation, and recovery.
+
+## Task success
+
+<p align="center">
+  <img src="docs/media/success_rates.svg" alt="Overall success on all 14 tasks for 12 models, with model logos and sample-standard-deviation error bars" width="100%">
+</p>
+
+<details>
+<summary><strong>View exact scores and all 14 task results</strong></summary>
+
+Each run covers **11 single-arm and 3 dual-arm tasks**, with 20 physically verified
+seeds per task. Bars show the mean of the three run-level task macro-averages;
+error bars show sample standard deviation. The top three means are close and their
+run-level ranges overlap.
+
+| Model | Success | Run-to-run SD |
+|:--|--:|--:|
+| Qwen3.8-max | 53.93% | 3.17 pp |
+| Opus-5 | 52.86% | 2.79 pp |
+| GPT-5.6-sol | 51.55% | 4.31 pp |
+| GPT-5.6-terra | 23.10% | 1.25 pp |
+| Doubao-seed-2.1-turbo | 15.00% | 0.36 pp |
+| Gemini-3.6-flash | 14.17% | 0.21 pp |
+| GPT-5.6-luna | 13.93% | 0.71 pp |
+| Sonnet-5 | 9.05% | 1.49 pp |
+| Qwen3.7-max | 8.10% | 0.90 pp |
+| Qwen3.7-plus | 7.14% | 0.36 pp |
+| MiniMax-M3 | 4.05% | 0.55 pp |
+| MiMo-v2.5 | 3.33% | 0.21 pp |
+
+
+<img src="docs/media/success_by_task.svg" alt="Complete 14-task by 12-model success-rate matrix" width="100%">
+
+[Per-task CSV](docs/data/success_by_task.csv) · [Figure data](docs/data/results.json) · [Sources and aggregation](docs/data/SOURCES.md)
+
+</details>
+
+## Behavioral profiles
+
+<p align="center">
+  <img src="docs/media/capabilities_top10.gif" alt="Animated radar profiles of the top 10 models, showing nine behavioral dimensions on a fixed 0–100 scale" width="100%">
+</p>
+
+<details>
+<summary><strong>Read the nine dimensions</strong></summary>
+
+The tour follows the **top 10 models by overall task success**. Each profile pools
+applicable single- and dual-arm episodes from one annotated run; the three recovery
+scores exclude error-free episodes. Smooth transitions connect the recorded profiles.
+
+| Spatial perception | Robot manipulation | Error recovery |
+|:--|:--|:--|
+| **TL** Target localization | **MS** Manipulation semantics | **ED** Error detection |
+| **AE** Active exploration | **MP** Manipulation planning | **OC** Online correction |
+| **SR** Spatial relations | **FG** Fine-grained pre-contact analysis | **PF** Post-failure adjustment |
+
+Sonnet-5 uses its second annotated run; the other primary models use their first.
+The radar describes observed behaviors, while the success chart measures completed
+tasks. [Static profile](docs/media/capabilities_poster.png) · [MP4 animation](docs/media/capabilities_top10.mp4)
+
+</details>
+
+## Quick start
+
+**All assets required by the 14 main tasks are provided with this VA-Bench release.**
+No separate asset download from RoboTwin is needed. If `assets/` is already present,
+start below; otherwise, extract the release's [asset bundle](https://github.com/zhangzhongbo2213/VA-Bench-test/releases/tag/assets-v1)
+into the repository root as described in the [setup guide](docs/SETUP.md).
+
+Use your existing RoboTwin environment, or follow the setup guide to create a new one:
 
 ```bash
 conda activate RoboTwin
 cd VA-Bench
 python -m pip install --no-deps --no-build-isolation -e ./agent -e ./active_spatial_benchmark_xyz
-python script/configure_assets.py /path/to/RoboTwin/assets
 python script/check_setup.py
 ```
 
-For a new Python environment, install the dependencies first:
-
-```bash
-conda create -n va-bench python=3.10 -y
-conda activate va-bench
-bash script/install.sh
-```
-
-The installer needs Git, a CUDA toolkit compatible with PyTorch, and system
-`ffmpeg`, `libgl1`, `libglib2.0-0`, `libvulkan1` and `vulkan-tools`.
-
-For a checkout without `assets/`, download the
-[main-task asset bundle](https://github.com/zhangzhongbo2213/VA-Bench-test/releases/tag/assets-v1)
-using GitHub CLI (`gh`). This repository is private; authenticate with
-`gh auth login` using an account with repository access, then run from `VA-Bench/`:
-
-```bash
-gh release download assets-v1 --repo zhangzhongbo2213/VA-Bench-test \
-  --pattern 'va-bench-main-assets-v1.tar.gz*' --dir outputs/assets_download
-(cd outputs/assets_download && sha256sum -c va-bench-main-assets-v1.tar.gz.sha256)
-tar --keep-old-files -xzf outputs/assets_download/va-bench-main-assets-v1.tar.gz -C .
-python script/check_setup.py
-```
-
-The bundle includes the robot and every object variant used by the 14 main
-tasks with `vabench_eval` / `demo_clean`. `check_setup.py` verifies bundled asset
-checksums. Existing full RoboTwin assets can still be linked as above.
-To test actual rendering and stepping for all 14 environments without a model:
-
-```bash
-CUDA_VISIBLE_DEVICES=0 python script/check_setup.py --smoke
-```
-
-## Run evaluation
-
-Set an OpenAI-compatible endpoint (a locally served vision model also works):
+Connect your vision-language model and start with one episode:
 
 ```bash
 export AGENT_BASE_URL="http://localhost:8000/v1"
 export AGENT_MODEL="your-model-name"
-export AGENT_API_KEY="EMPTY"  # use the provider key for a hosted endpoint
+export AGENT_API_KEY="EMPTY"
 
-# First test: learn a summary, then evaluate one validated seed.
 python script/run_benchmark.py --run-id smoke \
   --tasks grasp_single_cube --num-seeds 1 --gpus 0 --parallel 1
+```
 
-# Full suite: 14 tasks × 20 seeds, three environments per selected GPU.
+Run all 14 tasks and monitor progress:
+
+```bash
 python script/run_benchmark.py --run-id full --gpus 0 1 --parallel 3
-
-# In another terminal:
 python script/monitor.py --run-id full
 ```
 
-Use `--wire-api anthropic_messages` for Anthropic Messages, or `--wire-api responses`
-for Responses. Each run first learns model-specific summaries from the bundled
-videos, then evaluates the selected tasks. `--dry-run` prints the commands without
-calling a model. Use a new `--run-id` for each experiment.
+[Environment & asset setup](docs/SETUP.md) · [Tasks & validated seeds](configs/main_tasks.json) · [Asset release](https://github.com/zhangzhongbo2213/VA-Bench-test/releases/tag/assets-v1)
 
-To reuse summaries, add `--summary-root /path/to/summaries`; each task needs
-`TASK/expert_learning.json`. Add `--summary-mode shared-summary` when the summaries
-come from another model. Model-specific mode validates the summary model name.
+---
 
-Defaults: active camera, actual RGB rendering at **1280×960**, JPEG 95, at most
-4 images per request, 262144-token context, 4096 output tokens, streaming enabled,
-temperature omitted. OpenAI reasoning defaults to `medium`; Anthropic thinking
-defaults to `enabled` with a 1024-token budget. For models without these options:
-
-```bash
-export AGENT_REASONING_EFFORT=none
-export AGENT_ANTHROPIC_THINKING=disabled
-```
-
-Task-specific horizons and the exact seed lists are in
-[`configs/main_tasks.json`](configs/main_tasks.json). `--num-seeds N` takes the
-first N validated seeds; the lists are not always contiguous. API/network failures
-are classified as infrastructure errors and retried up to three times. Success
-rate is `OK / (OK + FAIL)`; unresolved infrastructure errors are reported separately.
-
-Results, summaries, videos and transcripts are under `outputs/RUN_ID/`.
-`launch_status.json` tracks the stages; detailed evaluation status is under
-`state/runs/data/eval_pipelines/RUN_ID/pipeline_status.json`.
-
-## Tasks
-
-Single arm: `grasp_single_cube`, `grasp_single_pen`, `grasp_single_bottle`,
-`grasp_single_bottle_upright`, `grasp_pen_leaning_cube`, `click_bell_right`,
-`beat_block_hammer_right`, `place_cube_in_bowl`, `place_single_cube`,
-`place_single_bottle_upright`, `place_cube_on_cube`.
-
-Dual arm: `lift_pot`, `place_shoe`, `handover_horizontal_block`.
-
-Built on RoboTwin. See [LICENSE](LICENSE).
+Built on RoboTwin. [MIT License](LICENSE) · [Model logo credits](docs/media/logos/SOURCES.md)

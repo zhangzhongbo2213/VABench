@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VA-Bench — README preview</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f3f5f9;color:#25334a;font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}a{color:#6c57b8;text-decoration:none}a:hover{text-decoration:underline}.toolbar{height:54px;display:flex;align-items:center;justify-content:space-between;max-width:1110px;margin:18px auto;padding:0 8px;color:#7a8597;font-size:12px;letter-spacing:.04em}.toolbar strong{color:#536076;font-weight:600}.toolbar a{margin-left:22px}.markdown-body{max-width:1110px;margin:0 auto 70px;background:#fff;border:1px solid #e4e8f0;border-radius:20px;padding:42px 50px 34px;box-shadow:0 12px 50px #24325106}.markdown-body>p:first-child{margin:0 0 26px}.markdown-body p{margin:18px 0}.markdown-body>p[align="center"]{font-size:14px;color:#4b5870;line-height:1.95}.markdown-body>p:nth-child(3){font-size:12px;color:#758096}.markdown-body>p:nth-child(4){padding:8px 0 15px;letter-spacing:.015em}h2{font-size:25px;font-weight:650;letter-spacing:-.5px;margin:48px 0 21px;padding-bottom:12px;border-bottom:1px solid #e9ecf2;scroll-margin-top:28px}img{max-width:100%;height:auto;vertical-align:middle}.markdown-body>p:has(img){line-height:0}strong{color:#26354e}sup{font-size:9px;position:relative;top:-.12em}sub{font-size:11px}details{margin:20px 0;border:1px solid #e6eaf2;border-radius:10px;background:#fcfdff;padding:12px 17px}summary{cursor:pointer;font-size:13px;color:#65718a}details[open] summary{margin-bottom:20px}table{border-collapse:collapse;display:block;width:max-content;max-width:100%;overflow-x:auto;font-size:13px;margin:22px 0}td,th{padding:9px 15px;border:1px solid #e6eaf1}th{background:#f6f8fb;font-weight:600}tr:nth-child(2n){background:#fbfcfe}pre{background:#f5f7fb;border:1px solid #e9edf4;border-radius:10px;padding:20px 23px;overflow:auto;font:12px/1.8 "SFMono-Regular",Consolas,"Liberation Mono",monospace}code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:85%;background:#eff2f7;border-radius:4px;padding:2px 5px}pre code{font-size:inherit;padding:0;background:none}hr{border:0;border-top:1px solid #e6eaf2;margin:34px 0}.animation-tools{display:flex;justify-content:flex-end;gap:10px;margin:8px 0 14px}.animation-tools button{font:12px inherit;background:#f7f8fc;color:#647089;border:1px solid #e3e7ef;border-radius:7px;padding:6px 12px;cursor:pointer}.animation-tools button:hover{background:#edf0f8}.markdown-body>p:last-child{font-size:12px;color:#8b94a5}.review-note{font-size:11px;color:#9aa3b1;text-align:center;margin-top:-48px;margin-bottom:30px}@media(max-width:700px){body{background:#fff}.toolbar{padding:0 18px;margin:8px 0;height:44px}.toolbar a{margin-left:10px}.markdown-body{border:0;border-radius:0;padding:15px 19px;margin-bottom:35px;box-shadow:none}.markdown-body>p[align="center"]{font-size:11px}h2{font-size:22px;margin-top:32px}body{font-size:14px}pre{padding:15px;font-size:11px}.review-note{margin-top:0}.toolbar a:last-child{display:none}}
+</style>
+</head>
+<body>
+<div class="toolbar"><strong>VA-Bench / local review</strong><div><a href="README.md">Markdown source</a><a href="docs/media/success_rates.svg">Open chart</a><a href="docs/media/capabilities_top10.mp4">Open animation</a></div></div>
+<main class="markdown-body"><!-- README --></main>
+<div class="review-note">Local rendering of README.md. No external fonts, scripts or image services required.</div>
+<script>
+const gif=document.querySelector('img[src$="capabilities_top10.gif"]');
+if(gif){
+ const controls=document.createElement('div');controls.className='animation-tools';
+ const toggle=document.createElement('button');toggle.textContent='Pause on first profile';
+ const restart=document.createElement('button');restart.textContent='Restart tour';
+ let paused=false;
+ toggle.onclick=()=>{paused=!paused;gif.src=paused?'docs/media/capabilities_poster.png':'docs/media/capabilities_top10.gif?play='+Date.now();toggle.textContent=paused?'Play tour':'Pause on first profile';};
+ restart.onclick=()=>{paused=false;gif.src='docs/media/capabilities_top10.gif?restart='+Date.now();toggle.textContent='Pause on first profile';};
+ controls.append(toggle,restart);gif.parentElement.after(controls);
+}
+</script>
+</body>
+</html>

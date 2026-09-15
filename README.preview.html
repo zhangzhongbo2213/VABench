@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VA-Bench — README preview</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f3f5f9;color:#25334a;font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}a{color:#6c57b8;text-decoration:none}a:hover{text-decoration:underline}.toolbar{height:54px;display:flex;align-items:center;justify-content:space-between;max-width:1110px;margin:18px auto;padding:0 8px;color:#7a8597;font-size:12px;letter-spacing:.04em}.toolbar strong{color:#536076;font-weight:600}.toolbar a{margin-left:22px}.markdown-body{max-width:1110px;margin:0 auto 70px;background:#fff;border:1px solid #e4e8f0;border-radius:20px;padding:42px 50px 34px;box-shadow:0 12px 50px #24325106}.markdown-body>p:first-child{margin:0 0 26px}.markdown-body p{margin:18px 0}.markdown-body>p[align="center"]{font-size:14px;color:#4b5870;line-height:1.95}.markdown-body>p:nth-child(3){font-size:12px;color:#758096}.markdown-body>p:nth-child(4){padding:8px 0 15px;letter-spacing:.015em}h2{font-size:25px;font-weight:650;letter-spacing:-.5px;margin:48px 0 21px;padding-bottom:12px;border-bottom:1px solid #e9ecf2;scroll-margin-top:28px}img{max-width:100%;height:auto;vertical-align:middle}.markdown-body>p:has(img){line-height:0}strong{color:#26354e}sup{font-size:9px;position:relative;top:-.12em}sub{font-size:11px}details{margin:20px 0;border:1px solid #e6eaf2;border-radius:10px;background:#fcfdff;padding:12px 17px}summary{cursor:pointer;font-size:13px;color:#65718a}details[open] summary{margin-bottom:20px}table{border-collapse:collapse;display:block;width:max-content;max-width:100%;overflow-x:auto;font-size:13px;margin:22px 0}td,th{padding:9px 15px;border:1px solid #e6eaf1}th{background:#f6f8fb;font-weight:600}tr:nth-child(2n){background:#fbfcfe}pre{background:#f5f7fb;border:1px solid #e9edf4;border-radius:10px;padding:20px 23px;overflow:auto;font:12px/1.8 "SFMono-Regular",Consolas,"Liberation Mono",monospace}code{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:85%;background:#eff2f7;border-radius:4px;padding:2px 5px}pre code{font-size:inherit;padding:0;background:none}hr{border:0;border-top:1px solid #e6eaf2;margin:34px 0}.animation-tools{display:flex;justify-content:flex-end;gap:10px;margin:8px 0 14px}.animation-tools button{font:12px inherit;background:#f7f8fc;color:#647089;border:1px solid #e3e7ef;border-radius:7px;padding:6px 12px;cursor:pointer}.animation-tools button:hover{background:#edf0f8}.markdown-body>p:last-child{font-size:12px;color:#8b94a5}.review-note{font-size:11px;color:#9aa3b1;text-align:center;margin-top:-48px;margin-bottom:30px}@media(max-width:700px){body{background:#fff}.toolbar{padding:0 18px;margin:8px 0;height:44px}.toolbar a{margin-left:10px}.markdown-body{border:0;border-radius:0;padding:15px 19px;margin-bottom:35px;box-shadow:none}.markdown-body>p[align="center"]{font-size:11px}h2{font-size:22px;margin-top:32px}body{font-size:14px}pre{padding:15px;font-size:11px}.review-note{margin-top:0}.toolbar a:last-child{display:none}}
+</style>
+</head>
+<body>
+<div class="toolbar"><strong>VA-Bench / local review</strong><div><a href="README.md">Markdown source</a><a href="docs/media/success_rates.svg">Open chart</a><a href="docs/media/capabilities_top10.mp4">Open animation</a></div></div>
+<main class="markdown-body"><p align="center">
+  <img src="docs/media/title.svg" alt="VA-Bench: Measuring Embodied Spatial Intelligence through Visual Demonstrations, Active Perception, and Metric Control" width="100%">
+</p>
+<p align="center">
+Zhongbo Zhang<sup>1,*</sup> · Jiayi Jin<sup>1,*</sup> · Yifan Wang<sup>1</sup> · Zaibin Zhang<sup>1</sup><br>
+Haiwen Diao<sup>2</sup> · Lijun Wang<sup>1</sup> · Huchuan Lu<sup>1</sup>
+</p>
+<p align="center">
+<sup>1</sup> Dalian University of Technology &nbsp;&nbsp; <sup>2</sup> Nanyang Technological University<br>
+<sub>* Equal contribution</sub>
+</p>
+<p align="center">
+<a href="#task-success">Results</a> &nbsp; / &nbsp;
+<a href="#behavioral-profiles">Capability profiles</a> &nbsp; / &nbsp;
+<a href="#quick-start">Quick start</a> &nbsp; / &nbsp;
+<a href="https://github.com/zhangzhongbo2213/VA-Bench-test/releases/tag/assets-v1">Download assets</a>
+</p>
+<p><strong>Embodied spatial intelligence, tested through action.</strong> VA-Bench evaluates the
+complete observe–reason–act–revise loop. From RGB-only demonstrations, multimodal
+models learn task context, actively choose camera viewpoints, issue metric Cartesian
+commands, and revise their actions using execution feedback. We evaluate 12 models
+on 14 manipulation tasks, combining strict task success with nine behavioral
+diagnostics of perception, manipulation, and recovery.</p>
+<h2 id="task-success">Task success</h2>
+<p align="center">
+  <img src="docs/media/success_rates.svg" alt="Overall success on all 14 tasks for 12 models, with model logos and sample-standard-deviation error bars" width="100%">
+</p>
+<details>
+<summary><strong>View exact scores and all 14 task results</strong></summary>
+<p>Each run covers <strong>11 single-arm and 3 dual-arm tasks</strong>, with 20 physically verified
+seeds per task. Bars show the mean of the three run-level task macro-averages;
+error bars show sample standard deviation. The top three means are close and their
+run-level ranges overlap.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Model</th>
+<th style="text-align:right">Success</th>
+<th style="text-align:right">Run-to-run SD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Qwen3.8-max</td>
+<td style="text-align:right">53.93%</td>
+<td style="text-align:right">3.17 pp</td>
+</tr>
+<tr>
+<td style="text-align:left">Opus-5</td>
+<td style="text-align:right">52.86%</td>
+<td style="text-align:right">2.79 pp</td>
+</tr>
+<tr>
+<td style="text-align:left">GPT-5.6-sol</td>
+<td style="text-align:right">51.55%</td>
+<td style="text-align:right">4.31 pp</td>
+</tr>
+<tr>
+<td style="text-align:left">GPT-5.6-terra</td>
+<td style="text-align:right">23.10%</td>
+<td style="text-align:right">1.25 pp</td>
+</tr>
+<tr>
+<td style="text-align:left">Doubao-seed-2.1-turbo</td>
+<td style="text-align:right">15.00%</td>
+<td style="text-align:right">0.36 pp</td>
+</tr>
+<tr>
+<td style="text-align:left">Gemini-3.6-flash</td>
+<td style="text-align:right">14.17%</td>
+<td style="text-align:right">0.21 pp</td>
+</tr>
+<tr>
+<td style="text-align:left">GPT-5.6-luna</td>
+<td style="text-align:right">13.93%</td>
+<td style="text-align:right">0.71 pp</td>
+</tr>
+<tr>
+<td style="text-align:left">Sonnet-5</td>
+<td style="text-align:right">9.05%</td>
+<td style="text-align:right">1.49 pp</td>
+</tr>
+<tr>
+<td style="text-align:left">Qwen3.7-max</td>
+<td style="text-align:right">8.10%</td>
+<td style="text-align:right">0.90 pp</td>
+</tr>
+<tr>
+<td style="text-align:left">Qwen3.7-plus</td>
+<td style="text-align:right">7.14%</td>
+<td style="text-align:right">0.36 pp</td>
+</tr>
+<tr>
+<td style="text-align:left">MiniMax-M3</td>
+<td style="text-align:right">4.05%</td>
+<td style="text-align:right">0.55 pp</td>
+</tr>
+<tr>
+<td style="text-align:left">MiMo-v2.5</td>
+<td style="text-align:right">3.33%</td>
+<td style="text-align:right">0.21 pp</td>
+</tr>
+</tbody>
+</table>
+<img src="docs/media/success_by_task.svg" alt="Complete 14-task by 12-model success-rate matrix" width="100%">
+<p><a href="docs/data/success_by_task.csv">Per-task CSV</a> · <a href="docs/data/results.json">Figure data</a> · <a href="docs/data/SOURCES.md">Sources and aggregation</a></p>
+</details>
+<h2 id="behavioral-profiles">Behavioral profiles</h2>
+<p align="center">
+  <img src="docs/media/capabilities_top10.gif" alt="Animated radar profiles of the top 10 models, showing nine behavioral dimensions on a fixed 0–100 scale" width="100%">
+</p>
+<details>
+<summary><strong>Read the nine dimensions</strong></summary>
+<p>The tour follows the <strong>top 10 models by overall task success</strong>. Each profile pools
+applicable single- and dual-arm episodes from one annotated run; the three recovery
+scores exclude error-free episodes. Smooth transitions connect the recorded profiles.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Spatial perception</th>
+<th style="text-align:left">Robot manipulation</th>
+<th style="text-align:left">Error recovery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>TL</strong> Target localization</td>
+<td style="text-align:left"><strong>MS</strong> Manipulation semantics</td>
+<td style="text-align:left"><strong>ED</strong> Error detection</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>AE</strong> Active exploration</td>
+<td style="text-align:left"><strong>MP</strong> Manipulation planning</td>
+<td style="text-align:left"><strong>OC</strong> Online correction</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>SR</strong> Spatial relations</td>
+<td style="text-align:left"><strong>FG</strong> Fine-grained pre-contact analysis</td>
+<td style="text-align:left"><strong>PF</strong> Post-failure adjustment</td>
+</tr>
+</tbody>
+</table>
+<p>Sonnet-5 uses its second annotated run; the other primary models use their first.
+The radar describes observed behaviors, while the success chart measures completed
+tasks. <a href="docs/media/capabilities_poster.png">Static profile</a> · <a href="docs/media/capabilities_top10.mp4">MP4 animation</a></p>
+</details>
+<h2 id="quick-start">Quick start</h2>
+<p><strong>All assets required by the 14 main tasks are provided with this VA-Bench release.</strong>
+No separate asset download from RoboTwin is needed. If <code>assets/</code> is already present,
+start below; otherwise, extract the release's <a href="https://github.com/zhangzhongbo2213/VA-Bench-test/releases/tag/assets-v1">asset bundle</a>
+into the repository root as described in the <a href="docs/SETUP.md">setup guide</a>.</p>
+<p>Use your existing RoboTwin environment, or follow the setup guide to create a new one:</p>
+<pre><code class="language-bash">conda activate RoboTwin
+cd VA-Bench
+python -m pip install --no-deps --no-build-isolation -e ./agent -e ./active_spatial_benchmark_xyz
+python script/check_setup.py
+</code></pre>
+<p>Connect your vision-language model and start with one episode:</p>
+<pre><code class="language-bash">export AGENT_BASE_URL=&quot;http://localhost:8000/v1&quot;
+export AGENT_MODEL=&quot;your-model-name&quot;
+export AGENT_API_KEY=&quot;EMPTY&quot;
+
+python script/run_benchmark.py --run-id smoke \
+  --tasks grasp_single_cube --num-seeds 1 --gpus 0 --parallel 1
+</code></pre>
+<p>Run all 14 tasks and monitor progress:</p>
+<pre><code class="language-bash">python script/run_benchmark.py --run-id full --gpus 0 1 --parallel 3
+python script/monitor.py --run-id full
+</code></pre>
+<p><a href="docs/SETUP.md">Environment &amp; asset setup</a> · <a href="configs/main_tasks.json">Tasks &amp; validated seeds</a> · <a href="https://github.com/zhangzhongbo2213/VA-Bench-test/releases/tag/assets-v1">Asset release</a></p>
+<hr />
+<p>Built on RoboTwin. <a href="LICENSE">MIT License</a> · <a href="docs/media/logos/SOURCES.md">Model logo credits</a></p>
+</main>
+<div class="review-note">Local rendering of README.md. No external fonts, scripts or image services required.</div>
+<script>
+const gif=document.querySelector('img[src$="capabilities_top10.gif"]');
+if(gif){
+ const controls=document.createElement('div');controls.className='animation-tools';
+ const toggle=document.createElement('button');toggle.textContent='Pause on first profile';
+ const restart=document.createElement('button');restart.textContent='Restart tour';
+ let paused=false;
+ toggle.onclick=()=>{paused=!paused;gif.src=paused?'docs/media/capabilities_poster.png':'docs/media/capabilities_top10.gif?play='+Date.now();toggle.textContent=paused?'Play tour':'Pause on first profile';};
+ restart.onclick=()=>{paused=false;gif.src='docs/media/capabilities_top10.gif?restart='+Date.now();toggle.textContent='Pause on first profile';};
+ controls.append(toggle,restart);gif.parentElement.after(controls);
+}
+</script>
+</body>
+</html>
