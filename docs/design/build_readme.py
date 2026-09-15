@@ -1,7 +1,7 @@
 """Render the local README figures from the checked-in result tables.
 
 Requires matplotlib, numpy, Pillow, markdown-it-py and ffmpeg.
-Run from any directory: python docs/design/build_readme.py [--animate]
+Run from any directory: python docs/design/build_readme.py [--animate | --gif-only]
 """
 from __future__ import annotations
 
@@ -30,6 +30,7 @@ INK = "#18233B"
 MUTED = "#758096"
 LINE = "#E4E9F2"
 GROUPS = ["#418FAD", "#8570C2", "#C08369"]
+GROUP_INK = ["#23647C", "#5E3E91", "#95482E"]
 GROUP_NAMES = ["Spatial perception", "Robot manipulation", "Error recovery"]
 plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
                      "text.color": INK, "axes.labelcolor": MUTED,
@@ -141,13 +142,12 @@ def task_matrix():
     plt.close(fig)
 
 
-def arc_label(ax, text, radius, center, color):
+def arc_label(ax, text, radius, center, color, size=12.5, tracking=.7):
     """Place upright glyphs along an arc, reversing direction on the lower half."""
-    font = FontProperties(family="DejaVu Sans", weight="bold", size=10.5)
+    font = FontProperties(family="DejaVu Sans", weight="bold", size=size)
     metrics = TextToPath()
     widths = np.array([metrics.get_text_width_height_descent(c, font, False)[0]
                        for c in text])
-    tracking = .7
     total = widths.sum() + tracking * (len(text) - 1)
     centers = np.cumsum(widths) - widths / 2 + np.arange(len(text)) * tracking - total / 2
     ax.apply_aspect()
@@ -169,7 +169,7 @@ def arc_label(ax, text, radius, center, color):
 
 class Radar:
     def __init__(self):
-        self.fig = plt.figure(figsize=(12.8, 8.2), dpi=100)
+        self.fig = plt.figure(figsize=(12.8, 8.6), dpi=150)
         card(self.fig)
         header(self.fig, "02", "TOP 10 · BEHAVIORAL PROFILES", "Nine dimensions of embodied intelligence")
         self.ax = self.fig.add_axes([.01, .075, .675, .72])
@@ -198,24 +198,20 @@ class Radar:
             self.ax.plot(np.array([103, 158]) * np.cos(boundary),
                          np.array([103, 158]) * np.sin(boundary), color=LINE,
                          linewidth=.85, linestyle=(0, (2, 3)), zorder=0)
-            arc_label(self.ax, name.upper(), 172, center, GROUPS[j])
+            arc_label(self.ax, name.upper(), 172, center, GROUP_INK[j])
         for radius in (20, 40, 60, 80, 100):
             self.ax.add_patch(Polygon(self.unit * radius, closed=True,
                   fill=False, edgecolor=LINE, linewidth=.85, zorder=0))
         for i, unit in enumerate(self.unit):
             self.ax.plot([0, unit[0]*100], [0, unit[1]*100], color=LINE, linewidth=.7, zorder=0)
-        for radius in (20, 40, 60, 80, 100):
-            angle = np.deg2rad(110)
-            self.ax.text(np.cos(angle)*radius - 2, np.sin(angle)*radius, str(radius),
-                         fontsize=7, color="#A3ADBF", va="center", ha="right")
         labels = ["Target\nlocalization", "Active\nexploration", "Spatial\nrelations",
                   "Manipulation\nsemantics", "Manipulation\nplanning", "Fine-grained\nanalysis",
                   "Error\ndetection", "Online\ncorrection", "Post-failure\nadjustment"]
-        self.labels = []
         for i, (label, dim) in enumerate(zip(labels, DATA["dimensions"])):
-            x, y = self.unit[i] * 127
-            self.labels.append(self.ax.text(x, y, label, fontsize=9.3, ha="center", va="center",
-                               linespacing=1.35, color=GROUPS[dim["group"]], weight="medium"))
+            center = np.rad2deg(self.theta[i])
+            radii = (141, 126) if np.sin(self.theta[i]) >= 0 else (126, 141)
+            for line, radius in zip(label.split("\n"), radii):
+                arc_label(self.ax, line, radius, center, GROUP_INK[dim["group"]], size=11.2, tracking=.2)
         self.polygon = Polygon(self.unit * 50, closed=True, linewidth=2.4,
                                edgecolor=MODELS[0]["color"], facecolor=(*to_rgb(MODELS[0]["color"]), .16), zorder=3)
         self.ax.add_patch(self.polygon)
@@ -223,18 +219,18 @@ class Radar:
         self.fig.add_artist(FancyBboxPatch((.69, .194), .27, .56,
                            boxstyle="round,pad=.006,rounding_size=.018", transform=self.fig.transFigure,
                            edgecolor=LINE, linewidth=.9, facecolor="#F8FAFD", zorder=-1))
-        self.index_label = self.fig.text(.716, .712, "", fontsize=8.8, color=INK, weight="bold")
+        self.index_label = self.fig.text(.716, .712, "", fontsize=10.5, color=INK, weight="bold")
         self.icon_ax = self.fig.add_axes([.716, .625, .035, .057])
         self.icon_ax.axis("off")
         self.icon_artist = self.icon_ax.imshow(logo(MODELS[0], 60))
-        self.model_label = self.fig.text(.763, .650, "", fontsize=15, weight="bold", va="center")
-        self.fig.text(.716, .567, "OVERALL TASK SUCCESS", fontsize=8, color=INK, weight="bold")
+        self.model_label = self.fig.text(.763, .650, "", fontsize=16.5, weight="bold", va="center")
+        self.fig.text(.716, .567, "OVERALL TASK SUCCESS", fontsize=9.5, color=INK, weight="bold")
         self.success_label = self.fig.text(.715, .513, "", fontsize=31, weight="bold", va="center")
         self.group_values = []
         for j, name in enumerate(GROUP_NAMES):
             y = .433 - j*.081
-            self.fig.text(.716, y, name, fontsize=9.5, weight="bold", color=GROUPS[j])
-            self.group_values.append(self.fig.text(.716, y-.028, "", fontsize=9.3, color=INK))
+            self.fig.text(.716, y, name, fontsize=11, weight="bold", color=GROUP_INK[j])
+            self.group_values.append(self.fig.text(.716, y-.032, "", fontsize=10.5, weight="bold", color=INK))
         self.progress = []
         for i in range(10):
             x = .044 + i*.0913
@@ -261,33 +257,31 @@ class Radar:
         self.index_label.set_text(f"MODEL {selected+1:02d} / 10")
         self.icon_artist.set_data(logo(model, 60))
         self.model_label.set_text(model["name"].replace("Doubao-seed-", "Doubao ").replace("Gemini-", "Gemini "))
-        self.model_label.set_fontsize(12.5 if len(model["name"]) > 18 else 15)
+        self.model_label.set_fontsize(14.5 if len(model["name"]) > 18 else 16.5)
         self.success_label.set_text(f"{model['mean']:.2f}%")
-        self.success_label.set_color(model["color"])
+        self.success_label.set_color(np.array(to_rgb(model["color"])) * .7 + np.array(to_rgb(INK)) * .3)
         for j, text in enumerate(self.group_values):
             text.set_text("  ·  ".join(f"{DATA['dimensions'][k]['code']} {model['capabilities'][k]:.1f}" for k in range(j*3,j*3+3)))
-        opacity = (2*mix - 1)**2 if 0 < mix < 1 else 1
-        for artist in [self.index_label, self.icon_artist, self.model_label,
-                       self.success_label, *self.group_values]:
-            artist.set_alpha(opacity)
         for i, patch in enumerate(self.progress):
             patch.set_facecolor(model["color"] if i == selected else LINE)
 
-    def save(self, animate):
+    def save(self, animate, gif_only=False):
         self.update(0)
-        self.fig.savefig(MEDIA / "capabilities_poster.png", dpi=150)
-        self.fig.savefig(MEDIA / "capabilities_poster.svg")
+        if not gif_only:
+            self.fig.savefig(MEDIA / "capabilities_poster.png", dpi=150)
+            self.fig.savefig(MEDIA / "capabilities_poster.svg")
         if not animate:
             plt.close(self.fig)
             return
         fps, hold, transition = 20, 28, 18
         width, height = self.fig.canvas.get_width_height()
+        master = MEDIA / ".radar-master.mkv"
         command = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
                    "-f", "rawvideo", "-vcodec", "rawvideo", "-pix_fmt", "rgb24",
                    "-s", f"{width}x{height}", "-r", str(fps), "-i", "-", "-an",
                    "-vf", "pad=ceil(iw/2)*2:ceil(ih/2)*2:color=white",
-                   "-c:v", "libx264", "-preset", "fast", "-crf", "17", "-pix_fmt", "yuv420p",
-                   str(MEDIA / "capabilities_top10.mp4")]
+                   "-c:v", "libx264rgb", "-preset", "fast", "-crf", "0", "-threads", "4",
+                   str(master)]
         with subprocess.Popen(command, stdin=subprocess.PIPE) as process:
             for i in range(10):
                 self.update(i)
@@ -304,12 +298,17 @@ class Radar:
             if process.wait() != 0:
                 raise RuntimeError("Video rendering failed")
         palette = MEDIA / ".radar-palette.png"
-        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(MEDIA/"capabilities_top10.mp4"),
-                        "-vf", "palettegen=stats_mode=diff", "-frames:v", "1", str(palette)], check=True)
-        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(MEDIA/"capabilities_top10.mp4"),
-                        "-i", str(palette), "-lavfi", "paletteuse=dither=bayer:bayer_scale=4:diff_mode=rectangle",
+        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(master),
+                        "-vf", "palettegen=stats_mode=full", "-frames:v", "1", str(palette)], check=True)
+        subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(master),
+                        "-i", str(palette), "-lavfi", "paletteuse=dither=none:diff_mode=rectangle",
                         "-loop", "0", str(MEDIA/"capabilities_top10.gif")], check=True)
+        if not gif_only:
+            subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(master),
+                            "-c:v", "libx264", "-preset", "fast", "-crf", "16", "-pix_fmt", "yuv420p",
+                            "-threads", "4", str(MEDIA / "capabilities_top10.mp4")], check=True)
         palette.unlink()
+        master.unlink()
         plt.close(self.fig)
 
 
@@ -450,9 +449,15 @@ def preview():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--animate", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--animate", action="store_true")
+    mode.add_argument("--gif-only", action="store_true", help="Regenerate only the radar GIF")
     args = parser.parse_args()
     MEDIA.mkdir(parents=True, exist_ok=True)
+    if args.gif_only:
+        Radar().save(True, gif_only=True)
+        print("Radar GIF generated", flush=True)
+        return
     title_art()
     success_chart()
     task_matrix()
