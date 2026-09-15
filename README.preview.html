@@ -126,10 +126,6 @@ run-level ranges overlap.</p>
 <p align="center">
   <img src="docs/media/capabilities_top10.gif" alt="Animated radar profiles of the top 10 models, showing nine behavioral dimensions on a fixed 0–100 scale" width="100%">
 </p>
-<p align="center">
-  <a href="docs/interactive/radar.html"><strong>▶ Interactive radar · Pause &amp; select a model</strong></a><br>
-  <sub>Download the HTML file and open it in a browser.</sub>
-</p>
 <details>
 <summary><strong>Read the nine dimensions</strong></summary>
 <p>The tour follows the <strong>top 10 models by overall task success</strong>. Each profile pools
@@ -196,15 +192,13 @@ python script/monitor.py --run-id full
 <script>
 const gif=document.querySelector('img[src$="capabilities_top10.gif"]');
 if(gif){
- const frame=document.createElement('iframe');
- frame.src='docs/interactive/radar.html';frame.title='Interactive radar — pause and select a model';
- frame.style.cssText='display:block;width:100%;height:740px;border:0;';
- window.addEventListener('message',event=>{
-  if(event.source===frame.contentWindow && event.data?.type==='va-bench-radar-size' && Number.isFinite(event.data.height)){
-   frame.style.height=Math.max(180,Math.min(2000,event.data.height))+'px';
-  }
- });
- gif.parentElement.replaceWith(frame);
+ const controls=document.createElement('div');controls.className='animation-tools';
+ const toggle=document.createElement('button');toggle.textContent='Pause on first profile';
+ const restart=document.createElement('button');restart.textContent='Restart tour';
+ let paused=false;
+ toggle.onclick=()=>{paused=!paused;gif.src=paused?'docs/media/capabilities_poster.png':'docs/media/capabilities_top10.gif?play='+Date.now();toggle.textContent=paused?'Play tour':'Pause on first profile';};
+ restart.onclick=()=>{paused=false;gif.src='docs/media/capabilities_top10.gif?restart='+Date.now();toggle.textContent='Pause on first profile';};
+ controls.append(toggle,restart);gif.parentElement.after(controls);
 }
 </script>
 </body>

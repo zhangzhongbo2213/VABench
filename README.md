@@ -74,11 +74,6 @@ run-level ranges overlap.
   <img src="docs/media/capabilities_top10.gif" alt="Animated radar profiles of the top 10 models, showing nine behavioral dimensions on a fixed 0–100 scale" width="100%">
 </p>
 
-<p align="center">
-  <a href="docs/interactive/radar.html"><strong>▶ Interactive radar · Pause &amp; select a model</strong></a><br>
-  <sub>Download the HTML file and open it in a browser.</sub>
-</p>
-
 <details>
 <summary><strong>Read the nine dimensions</strong></summary>
 
