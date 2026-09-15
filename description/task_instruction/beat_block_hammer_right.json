@@ -1,0 +1,15 @@
+{
+  "full_description": "use the right arm to grasp the hammer handle, lift the hammer clear of the table, and contact the red block with the hammer head",
+  "schema": "{A} notifies the hammer, {B} notifies the block, {a} notifies the right arm",
+  "preference": "active-perception right-arm tool-use benchmark; infer handle grasp, tool orientation, hammer-head location, and block alignment from observations",
+  "seen": [
+    "Use {a} to grasp {A} and strike {B}.",
+    "Pick up the hammer with the right arm and hit the red block.",
+    "Grasp the hammer handle and place its head on the block."
+  ],
+  "unseen": [
+    "Use the right arm to hammer the block.",
+    "Pick up {A} and strike {B}.",
+    "Hit the red block using the hammer."
+  ]
+}

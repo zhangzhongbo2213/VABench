@@ -1,0 +1,14 @@
+{
+  "full_description": "Use the right arm to press the top center of the bell on the table.",
+  "schema": "{A} identifies the bell and {a} identifies the right arm.",
+  "preference": "Use a concise instruction for the single-right-arm task.",
+  "seen": [
+    "Use {a} to press the top center of {A}.",
+    "Click {A}'s top center with {a}.",
+    "Press the center button on {A} using {a}."
+  ],
+  "unseen": [
+    "Use the right arm to click the bell.",
+    "Press the bell's top center with the right gripper."
+  ]
+}

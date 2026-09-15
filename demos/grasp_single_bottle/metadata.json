@@ -1,0 +1,28 @@
+{
+  "task": "grasp_single_bottle",
+  "config": "demo_clean",
+  "seed": 0,
+  "active_arm": "right",
+  "success": true,
+  "planner_success": true,
+  "execution": "robotwin_two_pass_planner_qpos_replay",
+  "arm_control": "planner position/velocity arrays applied as joint drive targets",
+  "gripper_control": "normalized gripper path applied as gripper joint drive targets",
+  "video": "center_high_qpos_replay.mp4",
+  "view": "center_high",
+  "frame_count": 45,
+  "source_frame_count": 178,
+  "image_size": [
+    1280,
+    960
+  ],
+  "source_fps": 12,
+  "fps": 3,
+  "sample_frequency_physics_steps": 8,
+  "temporal_stride": 4,
+  "temporal_sampling_rule": "keep source capture indices divisible by temporal_stride",
+  "special_final_frame_retained": false,
+  "stored_qpos_trajectory": false,
+  "stored_eepose": false,
+  "stored_actions": false
+}

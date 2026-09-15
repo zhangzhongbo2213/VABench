@@ -1,0 +1,10 @@
+{
+  "full_description": "use the right arm to grasp the pen and lift it from the table",
+  "schema": "{A} notifies the pen, {a} notifies the arm to grasp the pen",
+  "preference": "single-arm pen grasp test; keep instructions concise",
+  "instruction": [
+    "Grasp the pen using {a}.",
+    "Pick up the pen with {a}.",
+    "Lift the pen from the table using the right arm."
+  ]
+}

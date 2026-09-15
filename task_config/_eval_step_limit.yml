@@ -1,0 +1,14 @@
+grasp_single_cube: 1000
+grasp_single_pen: 1000
+grasp_single_bottle: 1000
+grasp_single_bottle_upright: 1000
+grasp_pen_leaning_cube: 1000
+click_bell_right: 400
+beat_block_hammer_right: 400
+place_cube_in_bowl: 700
+place_single_cube: 700
+place_single_bottle_upright: 700
+place_cube_on_cube: 700
+lift_pot: 400
+place_shoe: 500
+handover_horizontal_block: 600

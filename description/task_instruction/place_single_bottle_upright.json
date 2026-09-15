@@ -1,0 +1,10 @@
+{
+  "full_description": "use the right arm to pick up the upright bottle and place it on the green target area",
+  "schema": "{A} identifies the upright bottle, {B} identifies the target area, and {a} identifies the arm",
+  "preference": "single-right-arm upright bottle placement task; keep instructions concise",
+  "instruction": [
+    "Place {A} on {B} using {a}.",
+    "Pick up the upright bottle and move it onto the green target area.",
+    "Use the right arm to place the upright bottle on the target pad."
+  ]
+}

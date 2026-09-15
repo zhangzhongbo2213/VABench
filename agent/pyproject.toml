@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent"
+version = "0.1.0"
+description = "Independent vision-language model harness for RoboTwin active spatial evaluation."
+requires-python = ">=3.10"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Local" }]
+dependencies = [
+  "imageio>=2.31",
+  "imageio-ffmpeg>=0.4",
+  "Pillow>=9.2",
+]
+
+[project.scripts]
+agent = "agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

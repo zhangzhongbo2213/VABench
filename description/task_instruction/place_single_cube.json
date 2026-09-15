@@ -1,0 +1,10 @@
+{
+  "full_description": "use the right arm to pick up the red cube and place it on the green target area",
+  "schema": "{A} identifies the cube, {B} identifies the target area, and {a} identifies the arm",
+  "preference": "single-right-arm cube placement task; keep instructions concise",
+  "instruction": [
+    "Place {A} on {B} using {a}.",
+    "Pick up the red cube and move it onto the green target area.",
+    "Use the right arm to place the cube on the target pad."
+  ]
+}

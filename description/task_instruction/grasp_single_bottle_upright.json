@@ -1,0 +1,10 @@
+{
+  "full_description": "use the right arm to grasp the upright bottle and lift it from the table",
+  "schema": "{A} notifies the upright bottle, {a} notifies the arm to grasp the bottle",
+  "preference": "single-arm upright bottle grasp test; keep instructions concise",
+  "instruction": [
+    "Grasp the upright bottle using {a}.",
+    "Pick up the upright bottle with {a}.",
+    "Lift the upright bottle using the right arm."
+  ]
+}

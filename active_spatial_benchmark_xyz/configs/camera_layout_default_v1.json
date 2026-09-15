@@ -1,0 +1,32 @@
+{
+  "schema_version": "spatial.camera_layout.v1",
+  "layout_id": "robotwin_default_five_view_v1",
+  "mirror_x_for_left_arm": true,
+  "views": {
+    "topdown": {
+      "offset_world_m": [0.0, 0.0, 0.68],
+      "up_hint_world": [0.0, 1.0, 0.0],
+      "tags": ["axis_approach"]
+    },
+    "side": {
+      "offset_world_m": [0.58, -0.02, 0.06],
+      "up_hint_world": [0.0, 0.0, 1.0],
+      "tags": ["axis_closing"]
+    },
+    "front_side_45": {
+      "offset_world_m": [0.44, -0.44, 0.18],
+      "up_hint_world": [0.0, 0.0, 1.0],
+      "tags": ["oblique"]
+    },
+    "side_top_45": {
+      "offset_world_m": [0.48, -0.02, 0.48],
+      "up_hint_world": [0.0, 0.0, 1.0],
+      "tags": ["oblique", "support_clearance"]
+    },
+    "oblique_45": {
+      "offset_world_m": [0.42, -0.42, 0.42],
+      "up_hint_world": [0.0, 0.0, 1.0],
+      "tags": ["oblique", "contact_pair"]
+    }
+  }
+}

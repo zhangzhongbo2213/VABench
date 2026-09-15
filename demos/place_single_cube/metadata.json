@@ -1,0 +1,26 @@
+{
+  "task": "place_single_cube",
+  "config": "demo_clean",
+  "seed": 1,
+  "active_arm": "right",
+  "success": true,
+  "planner_success": true,
+  "execution": "robotwin_expert_replay_rgb_only_index",
+  "video": "center_high_replay.mp4",
+  "view": "center_high",
+  "frame_count": 762,
+  "source_frame_count": 3048,
+  "image_size": [
+    1280,
+    960
+  ],
+  "source_fps": 80,
+  "fps": 20,
+  "sample_frequency_physics_steps": 4,
+  "temporal_stride": 4,
+  "temporal_sampling_rule": "keep one rendered observation for every four physics frames",
+  "special_final_frame_retained": false,
+  "stored_qpos_trajectory": false,
+  "stored_eepose": false,
+  "stored_actions": false
+}

@@ -1,0 +1,10 @@
+{
+  "full_description": "use the right arm to pick up the red cube and place it inside the bowl",
+  "schema": "{A} identifies the cube, {B} identifies the bowl, and {a} identifies the arm",
+  "preference": "single-right-arm cube placement task; keep instructions concise",
+  "instruction": [
+    "Place {A} inside {B} using {a}.",
+    "Pick up the cube and put it in the bowl with the right arm.",
+    "Use {a} to move {A} into {B}."
+  ]
+}

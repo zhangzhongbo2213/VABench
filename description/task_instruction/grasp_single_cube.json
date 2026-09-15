@@ -1,0 +1,10 @@
+{
+  "full_description": "use the right arm to grasp the cube and lift it from the table",
+  "schema": "{A} notifies the cube, {a} notifies the arm to grasp the cube",
+  "preference": "single-arm cube grasp test; keep instructions concise",
+  "instruction": [
+    "Grasp the cube using {a}.",
+    "Pick up the cube with {a}.",
+    "Lift the cube from the table using the right arm."
+  ]
+}

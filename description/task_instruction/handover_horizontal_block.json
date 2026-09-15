@@ -1,0 +1,24 @@
+{
+  "full_description": "Inspect the horizontal red block's initial position and choose the arm on its reachable side as the giver; grasp and lift a regular segment, rotate the block's long axis to world vertical in clear space, transfer a separate exposed segment to the opposite receiving arm, ensure the receiver has securely grasped it, then release the giver",
+  "schema": "{A} denotes the red 3 by 3 by 20 centimeter block, {a} denotes the giver arm, and {b} denotes the receiver arm",
+  "preference": "num of words should not exceed 15",
+  "seen": [
+    "Lift {A}, turn it vertical, and pass it to the other arm.",
+    "Use {a} to raise {A} vertically and transfer it to {b}.",
+    "Grasp {A}, rotate it upright, then complete the handover.",
+    "Pick up {A}, present it vertically, and pass it across.",
+    "Raise {A} upright before transferring it to the opposite arm.",
+    "Turn the lifted {A} vertical, then hand it to {b}.",
+    "Use the reachable arm to lift, verticalize, and transfer {A}.",
+    "Pass {A} vertically from its nearer arm to the other arm.",
+    "Lift the red block, rotate it upright, and switch hands.",
+    "Keep {A} vertical while transferring it between the arms."
+  ],
+  "unseen": [
+    "Pick {A}, make it vertical, and hand it over.",
+    "Transfer the upright red block to the opposite arm.",
+    "Lift {A} and rotate it vertical before switching arms.",
+    "Use one arm to raise {A} upright and pass it.",
+    "Hand the vertically held {A} to the other arm."
+  ]
+}

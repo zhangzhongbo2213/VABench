@@ -1,0 +1,73 @@
+{
+  "name": "VA-Bench",
+  "build_date": "2026-09-15",
+  "suite": "main non-generalization",
+  "single_arm_tasks": 11,
+  "dual_arm_tasks": 3,
+  "validated_seeds": 280,
+  "expert_rgb_videos": 14,
+  "assets": "External RoboTwin assets; configure using script/configure_assets.py",
+  "entry_point": "script/run_benchmark.py",
+  "validation": {
+    "isolated_checkout_outside_source_repository": true,
+    "checkout_path_with_spaces": true,
+    "editable_install_agent_and_active_camera_package": "passed",
+    "imports_resolve_to_exported_checkout": "passed",
+    "unit_tests": {
+      "passed": 202,
+      "failed": 0
+    },
+    "task_smoke_tests": {
+      "passed": [
+        "grasp_single_cube",
+        "grasp_single_pen",
+        "grasp_single_bottle",
+        "grasp_single_bottle_upright",
+        "grasp_pen_leaning_cube",
+        "click_bell_right",
+        "beat_block_hammer_right",
+        "place_cube_in_bowl",
+        "place_single_cube",
+        "place_single_bottle_upright",
+        "place_cube_on_cube",
+        "lift_pot",
+        "place_shoe",
+        "handover_horizontal_block"
+      ],
+      "operations": [
+        "reset validated seed",
+        "render 1280x960 RGB",
+        "camera action",
+        "write replay videos"
+      ]
+    },
+    "expert_video_decode_and_frame_counts": {
+      "passed": 14
+    },
+    "local_mock_provider_integration": {
+      "passed": true,
+      "task": "grasp_single_cube",
+      "operations": [
+        "streamed OpenAI-compatible visual requests",
+        "RGB expert frame retrieval",
+        "summary learning and model provenance",
+        "gripper action",
+        "result and pipeline monitoring"
+      ],
+      "is_model_performance_evaluation": false
+    },
+    "stale_absolute_planner_asset_path_relocation": "passed",
+    "fresh_environment_dependency_install_tested": false
+  },
+  "tested_environment": {
+    "python": "3.10.18",
+    "numpy": "1.26.4",
+    "scipy": "1.15.3",
+    "torch": "2.4.1",
+    "torchvision": "0.19.1",
+    "sapien": "3.0.0b1",
+    "mplib": "0.2.1",
+    "nvidia-curobo": "0.7.7.post1.dev5+dirty",
+    "warp-lang": "1.9.0"
+  }
+}

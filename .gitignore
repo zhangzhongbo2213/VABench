@@ -1,0 +1,12 @@
+assets
+outputs/
+.agent/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+build/
+dist/
+.env
+*.log

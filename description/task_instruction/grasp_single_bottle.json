@@ -1,0 +1,24 @@
+{
+  "full_description": "use the right arm to grasp the bottle and lift it from the table",
+  "schema": "{A} notifies the bottle, {a} notifies the arm to grasp the bottle",
+  "preference": "single-arm bottle grasp test; keep instructions concise",
+  "seen": [
+    "Use {a} to grasp {A} and lift it.",
+    "Pick up {A} with the right arm.",
+    "Grasp the bottle using {a}.",
+    "Lift {A} from the table.",
+    "Use the right gripper to hold {A}.",
+    "Secure {A} with {a} and raise it.",
+    "Grab {A} and lift it clear of the table.",
+    "Pick up the bottle with {a}.",
+    "Close the right gripper on {A} and lift.",
+    "Use {a} to hold the bottle above the table."
+  ],
+  "unseen": [
+    "Grasp {A} with {a}.",
+    "Lift the bottle using the right arm.",
+    "Pick up {A} from the table.",
+    "Use {a} to grab and raise {A}.",
+    "Hold {A} with the right gripper."
+  ]
+}

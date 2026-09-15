@@ -1,0 +1,10 @@
+{
+  "full_description": "use the right arm to pick up the red cube and place it on top of the green cube",
+  "schema": "{A} identifies the cube to move, {B} identifies the supporting cube, and {a} identifies the arm",
+  "preference": "single-right-arm cube stacking task; keep instructions concise",
+  "instruction": [
+    "Place {A} on top of {B} using {a}.",
+    "Pick up the red cube and stack it on the green cube.",
+    "Use the right arm to place the red cube on the green cube."
+  ]
+}

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "active-spatial-benchmark-xyz"
+version = "0.1.0"
+description = "World-XYZ gripper control variant of the active spatial RoboTwin benchmark."
+requires-python = ">=3.10"
+dependencies = [
+  "numpy",
+  "pyyaml",
+  "imageio",
+  "pillow",
+  "transforms3d",
+]
+
+[tool.setuptools.packages.find]
+include = ["active_spatial_benchmark*"]
+
+[project.optional-dependencies]
+learning = [
+  "matplotlib",
+  "torch>=2.4",
+  "torchvision>=0.19",
+]

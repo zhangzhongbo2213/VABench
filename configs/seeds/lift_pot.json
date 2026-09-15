@@ -1,0 +1,32 @@
+{
+  "format": "robotwin_safe_eval_seed_set_v4",
+  "verification_method": "full-planner-expert",
+  "verification_level": "full_planner_expert_task_v1",
+  "task": "lift_pot",
+  "config": "demo_clean",
+  "active_arm": "both",
+  "selected_seeds": [
+    1002,
+    1003,
+    1004,
+    1005,
+    1006,
+    1008,
+    1013,
+    1020,
+    1023,
+    1025,
+    1026,
+    1030,
+    1034,
+    1035,
+    1039,
+    1040,
+    1044,
+    1046,
+    1048,
+    1049
+  ],
+  "complete": true,
+  "source_sha256": "f68e3912eda887b31140e9fc1ea5642197e5c7d9c8240b9e029b26d6d2c4ecec"
+}

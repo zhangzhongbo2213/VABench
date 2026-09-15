@@ -1,0 +1,10 @@
+{
+  "full_description": "use the right arm to grasp the pen leaning diagonally against the cube and lift the pen without targeting the support cube",
+  "schema": "{A} identifies the pen, {B} identifies the support cube, and {a} identifies the arm used to grasp the pen",
+  "preference": "single-right-arm active-spatial grasp task; the pen is the target and the cube is only a support object",
+  "instruction": [
+    "Grasp the pen leaning against the cube using {a} and lift it.",
+    "Pick up the diagonally supported pen with {a}.",
+    "Lift the leaning pen without grasping the support cube."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "task": "handover_horizontal_block",
+  "config": "demo_clean",
+  "seed": 0,
+  "active_arm": "both",
+  "success": true,
+  "planner_success": true,
+  "execution": "robotwin_two_pass_planner_qpos_replay",
+  "arm_control": "planner position/velocity arrays applied as joint drive targets",
+  "gripper_control": "normalized gripper path applied as gripper joint drive targets",
+  "video": "center_high_qpos_replay.mp4",
+  "view": "center_high",
+  "frame_count": 110,
+  "source_frame_count": 439,
+  "image_size": [
+    1280,
+    960
+  ],
+  "source_fps": 12,
+  "fps": 3,
+  "sample_frequency_physics_steps": 8,
+  "temporal_stride": 4,
+  "temporal_sampling_rule": "keep source capture indices divisible by temporal_stride",
+  "special_final_frame_retained": false,
+  "stored_qpos_trajectory": false,
+  "stored_eepose": false,
+  "stored_actions": false,
+  "object_type": "horizontal rectangular block",
+  "object_full_size_m": [
+    0.03,
+    0.03,
+    0.2
+  ],
+  "initial_object_orientation": "long axis horizontal",
+  "required_handover_orientation": "long axis approximately world vertical",
+  "role_policy": "giver selected from initial object side; opposite arm receives",
+  "handover_sequence": "grasp, lift, verticalize, receiver grasp, giver release"
+}

@@ -1,0 +1,26 @@
+{
+  "task": "beat_block_hammer_right",
+  "config": "demo_clean",
+  "seed": 0,
+  "active_arm": "right",
+  "success": true,
+  "planner_success": true,
+  "execution": "robotwin_expert_replay_rgb_only_index",
+  "video": "active_replay.mp4",
+  "view": "center_high",
+  "frame_count": 31,
+  "source_frame_count": 31,
+  "image_size": [
+    320,
+    240
+  ],
+  "source_fps": 2,
+  "fps": 2,
+  "sample_frequency_physics_steps": 1,
+  "temporal_stride": 1,
+  "temporal_sampling_rule": "existing sparse RGB-only expert replay",
+  "special_final_frame_retained": true,
+  "stored_qpos_trajectory": false,
+  "stored_eepose": false,
+  "stored_actions": false
+}
