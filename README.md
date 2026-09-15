@@ -8,7 +8,8 @@ per task**. Generalization and long-horizon tasks are excluded.
 ## Setup
 
 Linux, Python 3.10, an NVIDIA GPU, and a working RoboTwin environment with SAPIEN
-3.0.0b1, mplib 0.2.1 and cuRobo are required. Simulator assets are reused separately.
+3.0.0b1, mplib 0.2.1 and cuRobo are required. On a machine with an existing
+RoboTwin environment and assets:
 
 ```bash
 conda activate RoboTwin
@@ -27,11 +28,25 @@ bash script/install.sh
 ```
 
 The installer needs Git, a CUDA toolkit compatible with PyTorch, and system
-`ffmpeg`, `libgl1`, `libglib2.0-0`, `libvulkan1` and `vulkan-tools`. Then link the
-existing assets and run `check_setup.py` as above. Assets must contain
-`objects/`, including the objaverse index, and `embodiments/aloha-agilex/`.
-The asset files are never rewritten. To test actual rendering and stepping for
-all 14 environments without calling a model:
+`ffmpeg`, `libgl1`, `libglib2.0-0`, `libvulkan1` and `vulkan-tools`.
+
+For a checkout without `assets/`, download the
+[main-task asset bundle](https://github.com/zhangzhongbo2213/VA-Bench-test/releases/tag/assets-v1)
+using GitHub CLI (`gh`). This repository is private; authenticate with
+`gh auth login` using an account with repository access, then run from `VA-Bench/`:
+
+```bash
+gh release download assets-v1 --repo zhangzhongbo2213/VA-Bench-test \
+  --pattern 'va-bench-main-assets-v1.tar.gz*' --dir outputs/assets_download
+(cd outputs/assets_download && sha256sum -c va-bench-main-assets-v1.tar.gz.sha256)
+tar --keep-old-files -xzf outputs/assets_download/va-bench-main-assets-v1.tar.gz -C .
+python script/check_setup.py
+```
+
+The bundle includes the robot and every object variant used by the 14 main
+tasks with `vabench_eval` / `demo_clean`. `check_setup.py` verifies bundled asset
+checksums. Existing full RoboTwin assets can still be linked as above.
+To test actual rendering and stepping for all 14 environments without a model:
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 python script/check_setup.py --smoke

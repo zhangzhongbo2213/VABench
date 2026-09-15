@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib.util
 import json
 import os
@@ -27,12 +28,36 @@ def main():
             errors.append(f"Missing Python dependency: {module}")
     if not shutil.which("ffmpeg"):
         errors.append("ffmpeg is not available on PATH")
-    for rel in ("embodiments/aloha-agilex/config.yml", "objects/objaverse/list.json", "objects/cube/textured.obj"):
+    for rel in ("embodiments/aloha-agilex/config.yml", "embodiments/aloha-agilex/curobo_left.yml",
+                "embodiments/aloha-agilex/curobo_right.yml", "objects/objaverse/list.json",
+                "objects/same.json", "objects/cube/textured.obj"):
         if not (ROOT / "assets" / rel).is_file():
             errors.append(f"Missing asset: assets/{rel}")
     for obj in ("001_bottle", "002_bowl", "020_hammer", "041_shoe", "050_bell", "058_markpen", "060_kitchenpot"):
         if not (ROOT / "assets/objects" / obj).is_dir():
             errors.append(f"Missing object directory: {obj}")
+    assets_root = (ROOT / "assets").resolve()
+    manifest_path = assets_root / "ASSET_MANIFEST.json"
+    if manifest_path.is_file():
+        try:
+            manifest = json.loads(manifest_path.read_text())
+            if manifest["file_count"] != len(manifest["files"]) or not manifest["files"]:
+                raise ValueError("Invalid asset file count")
+            for relative, record in manifest["files"].items():
+                path = (assets_root / relative).resolve()
+                if not path.is_relative_to(assets_root):
+                    raise ValueError(f"Asset path escapes assets directory: {relative}")
+                if not path.is_file() or path.stat().st_size != record["size"]:
+                    errors.append(f"Missing or incomplete bundled asset: {relative}")
+                    continue
+                digest = hashlib.sha256()
+                with path.open("rb") as stream:
+                    for chunk in iter(lambda: stream.read(4 * 1024 * 1024), b""):
+                        digest.update(chunk)
+                if digest.hexdigest() != record["sha256"]:
+                    errors.append(f"Bundled asset checksum mismatch: {relative}")
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            errors.append(f"Invalid asset manifest: {exc}")
     for task in tasks:
         name = task["task"]
         for path in (ROOT / "envs" / f"{name}.py", ROOT / "description/task_instruction" / f"{name}.json", ROOT / "configs/seeds" / f"{name}.json"):

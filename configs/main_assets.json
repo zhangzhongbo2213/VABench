@@ -1,0 +1,35 @@
+{
+  "version": "1",
+  "release_tag": "assets-v1",
+  "archive": "va-bench-main-assets-v1.tar.gz",
+  "task_configs": ["vabench_eval", "demo_clean"],
+  "embodiment": "aloha-agilex",
+  "robot_files": [
+    "config.yml",
+    "curobo_left.yml",
+    "curobo_right.yml",
+    "collision_aloha_left.yml",
+    "collision_aloha_right.yml",
+    "urdf/arx5_description_isaac.urdf",
+    "srdf/arx5_description_isaac.srdf"
+  ],
+  "robot_urdf": "urdf/arx5_description_isaac.urdf",
+  "objects": {
+    "001_bottle": [13],
+    "002_bowl": [3],
+    "020_hammer": [0],
+    "041_shoe": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "050_bell": [0, 1],
+    "058_markpen": [0]
+  },
+  "articulated_objects": {
+    "060_kitchenpot": ["100015", "100023"]
+  },
+  "shared_files": [
+    "objects/objaverse/list.json",
+    "objects/same.json",
+    "objects/cube/textured.obj",
+    "objects/cube/base.mtl"
+  ],
+  "scope": "All object variants used by the 14 main tasks with clean scenes; randomized backgrounds and clutter are excluded."
+}

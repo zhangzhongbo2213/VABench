@@ -6,7 +6,7 @@
   "dual_arm_tasks": 3,
   "validated_seeds": 280,
   "expert_rgb_videos": 14,
-  "assets": "External RoboTwin assets; configure using script/configure_assets.py",
+  "assets": "Download the assets-v1 GitHub Release bundle, or link existing RoboTwin assets with script/configure_assets.py.",
   "entry_point": "script/run_benchmark.py",
   "validation": {
     "isolated_checkout_outside_source_repository": true,
@@ -69,5 +69,136 @@
     "mplib": "0.2.1",
     "nvidia-curobo": "0.7.7.post1.dev5+dirty",
     "warp-lang": "1.9.0"
+  },
+  "asset_bundle": {
+    "release_tag": "assets-v1",
+    "url": "https://github.com/zhangzhongbo2213/VA-Bench-test/releases/tag/assets-v1",
+    "archive": "va-bench-main-assets-v1.tar.gz",
+    "archive_bytes": 123710022,
+    "sha256": "1a264fd776997b3dc32e4ba5d2334a00d117790b80afa851ac2bdbc31ce5f4bf",
+    "asset_files_including_manifest": 190,
+    "validation": {
+      "independent_extracted_assets_without_source_asset_symlink": true,
+      "github_upload_download_sha256_match": true,
+      "downloaded_archive_setup": "passed",
+      "corrupted_asset_rejected": true,
+      "missing_shared_index_rejected": true,
+      "urdf_obj_mtl_references_checked": 222,
+      "environment_smoke_tasks_passed": [
+        "grasp_single_cube",
+        "grasp_single_pen",
+        "grasp_single_bottle",
+        "grasp_single_bottle_upright",
+        "grasp_pen_leaning_cube",
+        "click_bell_right",
+        "beat_block_hammer_right",
+        "place_cube_in_bowl",
+        "place_single_cube",
+        "place_single_bottle_upright",
+        "place_cube_on_cube",
+        "lift_pot",
+        "place_shoe",
+        "handover_horizontal_block"
+      ],
+      "environment_smoke_operations": [
+        "reset",
+        "render 1280x960 RGB",
+        "camera action",
+        "write replay videos"
+      ],
+      "object_variants_loaded_rendered_and_stepped": [
+        {
+          "object": "001_bottle",
+          "model_id": 13,
+          "articulated": false
+        },
+        {
+          "object": "002_bowl",
+          "model_id": 3,
+          "articulated": false
+        },
+        {
+          "object": "020_hammer",
+          "model_id": 0,
+          "articulated": false
+        },
+        {
+          "object": "041_shoe",
+          "model_id": 0,
+          "articulated": false
+        },
+        {
+          "object": "041_shoe",
+          "model_id": 1,
+          "articulated": false
+        },
+        {
+          "object": "041_shoe",
+          "model_id": 2,
+          "articulated": false
+        },
+        {
+          "object": "041_shoe",
+          "model_id": 3,
+          "articulated": false
+        },
+        {
+          "object": "041_shoe",
+          "model_id": 4,
+          "articulated": false
+        },
+        {
+          "object": "041_shoe",
+          "model_id": 5,
+          "articulated": false
+        },
+        {
+          "object": "041_shoe",
+          "model_id": 6,
+          "articulated": false
+        },
+        {
+          "object": "041_shoe",
+          "model_id": 7,
+          "articulated": false
+        },
+        {
+          "object": "041_shoe",
+          "model_id": 8,
+          "articulated": false
+        },
+        {
+          "object": "041_shoe",
+          "model_id": 9,
+          "articulated": false
+        },
+        {
+          "object": "050_bell",
+          "model_id": 0,
+          "articulated": false
+        },
+        {
+          "object": "050_bell",
+          "model_id": 1,
+          "articulated": false
+        },
+        {
+          "object": "058_markpen",
+          "model_id": 0,
+          "articulated": false
+        },
+        {
+          "object": "060_kitchenpot",
+          "model_id": 0,
+          "articulated": true
+        },
+        {
+          "object": "060_kitchenpot",
+          "model_id": 1,
+          "articulated": true
+        }
+      ],
+      "is_model_performance_evaluation": false
+    }
   }
 }
