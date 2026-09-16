@@ -13,8 +13,8 @@ Haiwen Diao<sup>2</sup> · Lijun Wang<sup>1</sup> · Huchuan Lu<sup>1</sup>
 </p>
 
 <p align="center">
-  <a href="docs/paper/VA-Bench-preview.pdf" title="Read the paper preview (39 pages; Figure 3 on page 33 is pending)">
-    <img src="docs/media/paper-button.svg" alt="Read paper — PDF preview" width="236" height="46">
+  <a href="docs/paper/VA-Bench.pdf" title="Read the paper (40 pages)">
+    <img src="docs/media/paper-button.svg" alt="Read paper — PDF" width="236" height="46">
   </a>
 </p>
 
