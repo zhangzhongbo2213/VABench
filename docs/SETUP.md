@@ -38,12 +38,12 @@ tar --keep-old-files -xzf /path/to/va-bench-main-assets-v1.tar.gz -C .
 ```
 
 If needed, obtain that same archive from the
-[VA-Bench asset release](https://github.com/zhangzhongbo2213/VA-Bench-test/releases/tag/assets-v1)
+[VA-Bench asset release](https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1)
 using GitHub CLI (`gh`). For a private repository, authenticate with `gh auth login`
 using an account with access, then run from `VA-Bench/`:
 
 ```bash
-gh release download assets-v1 --repo zhangzhongbo2213/VA-Bench-test \
+gh release download assets-v1 --repo zhangzhongbo2213/VABench \
   --pattern 'va-bench-main-assets-v1.tar.gz*' --dir outputs/assets_download
 (cd outputs/assets_download && sha256sum -c va-bench-main-assets-v1.tar.gz.sha256)
 tar --keep-old-files -xzf outputs/assets_download/va-bench-main-assets-v1.tar.gz -C .

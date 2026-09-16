@@ -22,7 +22,7 @@ Haiwen Diao<sup>2</sup> · Lijun Wang<sup>1</sup> · Huchuan Lu<sup>1</sup>
 <a href="#task-success">Results</a> &nbsp; / &nbsp;
 <a href="#behavioral-profiles">Capability profiles</a> &nbsp; / &nbsp;
 <a href="#quick-start">Quick start</a> &nbsp; / &nbsp;
-<a href="https://github.com/zhangzhongbo2213/VA-Bench-test/releases/tag/assets-v1">Download assets</a>
+<a href="https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1">Download assets</a>
 </p>
 
 **Embodied spatial intelligence, tested through action.** VA-Bench evaluates the
@@ -97,7 +97,7 @@ tasks. [Static profile](docs/media/capabilities_poster.png) · [MP4 animation](d
 
 **All assets required by the 14 main tasks are provided with this VA-Bench release.**
 No separate asset download from RoboTwin is needed. If `assets/` is already present,
-start below; otherwise, extract the release's [asset bundle](https://github.com/zhangzhongbo2213/VA-Bench-test/releases/tag/assets-v1)
+start below; otherwise, extract the release's [asset bundle](https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1)
 into the repository root as described in the [setup guide](docs/SETUP.md).
 
 Use your existing RoboTwin environment, or follow the setup guide to create a new one:
@@ -127,7 +127,7 @@ python script/run_benchmark.py --run-id full --gpus 0 1 --parallel 3
 python script/monitor.py --run-id full
 ```
 
-[Environment & asset setup](docs/SETUP.md) · [Tasks & validated seeds](configs/main_tasks.json) · [Asset release](https://github.com/zhangzhongbo2213/VA-Bench-test/releases/tag/assets-v1)
+[Environment & asset setup](docs/SETUP.md) · [Tasks & validated seeds](configs/main_tasks.json) · [Asset release](https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1)
 
 ---
 

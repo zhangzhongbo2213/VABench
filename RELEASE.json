@@ -72,7 +72,7 @@
   },
   "asset_bundle": {
     "release_tag": "assets-v1",
-    "url": "https://github.com/zhangzhongbo2213/VA-Bench-test/releases/tag/assets-v1",
+    "url": "https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1",
     "archive": "va-bench-main-assets-v1.tar.gz",
     "archive_bytes": 123710022,
     "sha256": "1a264fd776997b3dc32e4ba5d2334a00d117790b80afa851ac2bdbc31ce5f4bf",
