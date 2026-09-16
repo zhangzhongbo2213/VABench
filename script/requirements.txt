@@ -17,7 +17,7 @@ imageio-ffmpeg>=0.4
 h5py
 termcolor
 packaging
-setuptools>=68
+setuptools==80.9.0
 setuptools-scm
 wheel
 ninja

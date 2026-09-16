@@ -3,7 +3,7 @@ set -euo pipefail
 cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.."
 python -m pip install -r script/requirements.txt
 if ! python -c 'import pytorch3d' >/dev/null 2>&1; then
-  python -m pip install --no-build-isolation 'git+https://github.com/facebookresearch/pytorch3d.git@v0.7.8'
+  python -m pip install --no-build-isolation 'git+https://github.com/facebookresearch/pytorch3d.git@V0.7.8'
 fi
 if ! python -c 'import curobo' >/dev/null 2>&1; then
   python -m pip install --no-build-isolation 'git+https://github.com/NVlabs/curobo.git@v0.7.8'
