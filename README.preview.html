@@ -166,12 +166,13 @@ tasks. <a href="docs/media/capabilities_poster.png">Static profile</a> · <a hre
 No separate asset download from RoboTwin is needed. If <code>assets/</code> is already present,
 start below; otherwise, extract the release's <a href="https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1">asset bundle</a>
 into the repository root as described in the <a href="docs/SETUP.md">setup guide</a>.</p>
-<p>Use your existing RoboTwin environment, or follow the setup guide to create a new one:</p>
-<pre><code class="language-bash">conda activate RoboTwin
-cd VA-Bench
-python -m pip install --no-deps --no-build-isolation -e ./agent -e ./active_spatial_benchmark_xyz
-python script/check_setup.py
+<p>From the repository root, create the benchmark environment and install dependencies:</p>
+<pre><code class="language-bash">conda create -n va-bench python=3.10 -y
+conda activate va-bench
+bash script/install.sh
 </code></pre>
+<p>See the <a href="docs/SETUP.md">setup guide</a> for system prerequisites, environment checks,
+and reusing an existing RoboTwin environment.</p>
 <p>Connect your vision-language model and start with one episode:</p>
 <pre><code class="language-bash">export AGENT_BASE_URL=&quot;http://localhost:8000/v1&quot;
 export AGENT_MODEL=&quot;your-model-name&quot;

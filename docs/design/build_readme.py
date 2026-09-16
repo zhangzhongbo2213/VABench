@@ -407,14 +407,16 @@ No separate asset download from RoboTwin is needed. If `assets/` is already pres
 start below; otherwise, extract the release's [asset bundle](https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1)
 into the repository root as described in the [setup guide](docs/SETUP.md).
 
-Use your existing RoboTwin environment, or follow the setup guide to create a new one:
+From the repository root, create the benchmark environment and install dependencies:
 
 ```bash
-conda activate RoboTwin
-cd VA-Bench
-python -m pip install --no-deps --no-build-isolation -e ./agent -e ./active_spatial_benchmark_xyz
-python script/check_setup.py
+conda create -n va-bench python=3.10 -y
+conda activate va-bench
+bash script/install.sh
 ```
+
+See the [setup guide](docs/SETUP.md) for system prerequisites, environment checks,
+and reusing an existing RoboTwin environment.
 
 Connect your vision-language model and start with one episode:
 
