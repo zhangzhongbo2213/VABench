@@ -120,6 +120,17 @@ python script/run_benchmark.py --run-id smoke \
   --tasks grasp_single_cube --num-seeds 1 --gpus 0 --parallel 1
 ```
 
+The default wire protocol is **OpenAI Chat Completions** (`chat_completions`).
+To use Anthropic's native Messages API, switch explicitly before launching:
+
+```bash
+export AGENT_WIRE_API="anthropic_messages"
+# Or add: --wire-api anthropic_messages
+```
+
+When Claude is served through an OpenAI-compatible endpoint, keep the default
+`chat_completions` protocol.
+
 Run all 14 tasks and monitor progress:
 
 ```bash
