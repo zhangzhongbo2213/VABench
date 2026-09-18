@@ -335,7 +335,11 @@ def build_readme():
 
 <p align="center">
   <a href="docs/paper/VA-Bench.pdf" title="Read the paper (40 pages)">
-    <img src="docs/media/paper-button.svg" alt="Read paper — PDF" width="236" height="46">
+    <img src="docs/media/paper-button.svg" alt="PDF" width="118" height="46">
+  </a>
+  &nbsp; / &nbsp;
+  <a href="https://arxiv.org/abs/2609.19554" title="Read VA-Bench on arXiv">
+    <img src="docs/media/arxiv-button.svg" alt="arXiv" width="128" height="46">
   </a>
 </p>
 
