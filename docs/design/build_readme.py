@@ -347,7 +347,8 @@ def build_readme():
 <a href="#task-success">Results</a> &nbsp; / &nbsp;
 <a href="#behavioral-profiles">Capability profiles</a> &nbsp; / &nbsp;
 <a href="#quick-start">Quick start</a> &nbsp; / &nbsp;
-<a href="https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1">Download assets</a>
+Download assets: <a href="https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1">GitHub</a> &nbsp; / &nbsp;
+<a href="https://huggingface.co/datasets/zhangzhongbo2213/VA-Bench">Hugging Face</a>
 </p>
 
 **Embodied spatial intelligence, tested through action.** VA-Bench evaluates the
@@ -408,8 +409,10 @@ tasks. [Static profile](docs/media/capabilities_poster.png) · [MP4 animation](d
 
 **All assets required by the 14 main tasks are provided with this VA-Bench release.**
 No separate asset download from RoboTwin is needed. If `assets/` is already present,
-start below; otherwise, extract the release's [asset bundle](https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1)
-into the repository root as described in the [setup guide](docs/SETUP.md).
+start below; otherwise, download the same versioned asset bundle from
+[GitHub Releases](https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1)
+or [Hugging Face Datasets](https://huggingface.co/datasets/zhangzhongbo2213/VA-Bench),
+then extract it into the repository root as described in the [setup guide](docs/SETUP.md).
 
 From the repository root, create the benchmark environment and install dependencies:
 
@@ -451,7 +454,7 @@ python script/run_benchmark.py --run-id full --gpus 0 1 --parallel 3
 python script/monitor.py --run-id full
 ```
 
-[Environment & asset setup](docs/SETUP.md) · [Tasks & validated seeds](configs/main_tasks.json) · [Asset release](https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1)
+[Environment & asset setup](docs/SETUP.md) · [Tasks & validated seeds](configs/main_tasks.json) · [GitHub asset release](https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1) · [Hugging Face dataset](https://huggingface.co/datasets/zhangzhongbo2213/VA-Bench)
 
 ---
 

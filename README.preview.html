@@ -34,7 +34,8 @@ Haiwen Diao<sup>2</sup> · Lijun Wang<sup>1</sup> · Huchuan Lu<sup>1</sup>
 <a href="#task-success">Results</a> &nbsp; / &nbsp;
 <a href="#behavioral-profiles">Capability profiles</a> &nbsp; / &nbsp;
 <a href="#quick-start">Quick start</a> &nbsp; / &nbsp;
-<a href="https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1">Download assets</a>
+Download assets: <a href="https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1">GitHub</a> &nbsp; / &nbsp;
+<a href="https://huggingface.co/datasets/zhangzhongbo2213/VA-Bench">Hugging Face</a>
 </p>
 <p><strong>Embodied spatial intelligence, tested through action.</strong> VA-Bench evaluates the
 complete observe–reason–act–revise loop. From RGB-only demonstrations, multimodal
@@ -168,8 +169,10 @@ tasks. <a href="docs/media/capabilities_poster.png">Static profile</a> · <a hre
 <h2 id="quick-start">Quick start</h2>
 <p><strong>All assets required by the 14 main tasks are provided with this VA-Bench release.</strong>
 No separate asset download from RoboTwin is needed. If <code>assets/</code> is already present,
-start below; otherwise, extract the release's <a href="https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1">asset bundle</a>
-into the repository root as described in the <a href="docs/SETUP.md">setup guide</a>.</p>
+start below; otherwise, download the same versioned asset bundle from
+<a href="https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1">GitHub Releases</a>
+or <a href="https://huggingface.co/datasets/zhangzhongbo2213/VA-Bench">Hugging Face Datasets</a>,
+then extract it into the repository root as described in the <a href="docs/SETUP.md">setup guide</a>.</p>
 <p>From the repository root, create the benchmark environment and install dependencies:</p>
 <pre><code class="language-bash">conda create -n va-bench python=3.10 -y
 conda activate va-bench
@@ -196,7 +199,7 @@ To use Anthropic's native Messages API, switch explicitly before launching:</p>
 <pre><code class="language-bash">python script/run_benchmark.py --run-id full --gpus 0 1 --parallel 3
 python script/monitor.py --run-id full
 </code></pre>
-<p><a href="docs/SETUP.md">Environment &amp; asset setup</a> · <a href="configs/main_tasks.json">Tasks &amp; validated seeds</a> · <a href="https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1">Asset release</a></p>
+<p><a href="docs/SETUP.md">Environment &amp; asset setup</a> · <a href="configs/main_tasks.json">Tasks &amp; validated seeds</a> · <a href="https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1">GitHub asset release</a> · <a href="https://huggingface.co/datasets/zhangzhongbo2213/VA-Bench">Hugging Face dataset</a></p>
 <hr />
 <p>Built on RoboTwin. <a href="LICENSE">MIT License</a> · <a href="docs/media/logos/SOURCES.md">Model logo credits</a></p>
 </main>

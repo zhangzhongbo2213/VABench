@@ -37,15 +37,26 @@ clone alone does not extract them. If you already have
 tar --keep-old-files -xzf /path/to/va-bench-main-assets-v1.tar.gz -C .
 ```
 
-If needed, obtain that same archive from the
-[VA-Bench asset release](https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1)
-using GitHub CLI (`gh`). For a private repository, authenticate with `gh auth login`
-using an account with access, then run from `VA-Bench/`:
+The same versioned archive is mirrored in two locations. Download it from either
+the [GitHub asset release](https://github.com/zhangzhongbo2213/VABench/releases/tag/assets-v1)
+or the [Hugging Face dataset](https://huggingface.co/datasets/zhangzhongbo2213/VA-Bench).
+
+To download from GitHub using GitHub CLI (`gh`), run from `VA-Bench/`:
 
 ```bash
 gh release download assets-v1 --repo zhangzhongbo2213/VABench \
   --pattern 'va-bench-main-assets-v1.tar.gz*' --dir outputs/assets_download
 (cd outputs/assets_download && sha256sum -c va-bench-main-assets-v1.tar.gz.sha256)
+tar --keep-old-files -xzf outputs/assets_download/va-bench-main-assets-v1.tar.gz -C .
+```
+
+Alternatively, download the tagged archive directly from Hugging Face:
+
+```bash
+mkdir -p outputs/assets_download
+curl -L --fail \
+  'https://huggingface.co/datasets/zhangzhongbo2213/VA-Bench/resolve/assets-v1/va-bench-main-assets-v1.tar.gz?download=true' \
+  -o outputs/assets_download/va-bench-main-assets-v1.tar.gz
 tar --keep-old-files -xzf outputs/assets_download/va-bench-main-assets-v1.tar.gz -C .
 ```
 
